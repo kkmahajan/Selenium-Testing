@@ -1,5 +1,7 @@
 /target/
-/test-ouput/
-/extent-report.html
-/extent-report1.html
-/.settings/
+test-ouput
+test-output/
+extent-report.html
+extent-report1.html
+.settings/
+.settings
