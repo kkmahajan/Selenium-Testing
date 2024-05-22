@@ -2,6 +2,7 @@ package orangehrm;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -54,7 +55,20 @@ public class OrangeHRM {
 		Assert.assertEquals(chromeDriver.getTitle(), "OrangeHRM", "Validating the page title is correct after login");
 	}
 
-	@Test
+	@Test(priority = 3)
+	public void addEmployeeWithoutLoginDetailsTest() {
+
+		Random random = new Random();
+		String randomNumber = String.valueOf(random.nextInt(100));
+		chromeDriver.findElement(By.xpath("//span[normalize-space()='PIM']")).click();
+		chromeDriver.findElement(By.xpath("//a[normalize-space()='Add Employee']")).click();
+		chromeDriver.findElement(By.xpath("//input[@placeholder='First Name']")).sendKeys("John" + randomNumber);
+		chromeDriver.findElement(By.xpath("//input[@placeholder='Middle Name']")).sendKeys("K" + randomNumber);
+		chromeDriver.findElement(By.xpath("//input[@placeholder='Last Name']")).sendKeys("Doe" + randomNumber);
+		chromeDriver.findElement(By.xpath("//button[@type='submit']")).submit();
+	}
+
+	@Test(priority = 4)
 	public void logoutTest() {
 		waitForNow();
 		chromeDriver.findElement(By.xpath("//p[@class='oxd-userdropdown-name']")).click();
