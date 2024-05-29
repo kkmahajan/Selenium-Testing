@@ -10,15 +10,15 @@ public class GoogleSearchPageObjects {
 	By searchTextBox = By.name("q");
 	By searchButton = By.xpath("/html/body/div[1]/div[3]/form/div[1]/div[1]/div[4]/center/input[1]");
 	By showSearchButton = By.xpath("/html/body/div[1]/div[4]/div[1]/div");
-	
+
 	public GoogleSearchPageObjects(WebDriver driver) {
 		this.driver = driver;
 	}
-	
+
 	public void setTextInSearchTextBox(String text) {
 		driver.findElement(searchTextBox).sendKeys(text);
 	}
-	
+
 	public void clickSearchButton() {
 		driver.findElement(searchButton).click();
 	}
