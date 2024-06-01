@@ -4,12 +4,12 @@ test-output/
 extent-report.html
 extent-report1.html
 .settings/
-<<<<<<< HEAD
+
 .settings
-=======
+
 .settings
 
 .idea/
 /.idea/
->>>>>>> branch 'master' of https://github.com/kkmahajan/Selenium-Testing.git
+
 /extentReportForOrangeHrm/
