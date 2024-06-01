@@ -112,11 +112,9 @@ public class OrangeHRM {
 	public void addEmployeeWithoutLoginDetailsTest() {
 
 		testStep.log(Status.INFO, "Add Employee without login details test");
-		Random random = new Random();
-		randomNumber = String.valueOf(random.nextInt(100));
-		emplFName = "John" + randomNumber;
+		emplFName = "Janardhan";
 		empMName = "K";
-		empLName = "Doe" + randomNumber;
+		empLName = "Smith";
 		chromeDriver.findElement(By.xpath("//span[normalize-space()='PIM']")).click();
 		chromeDriver.findElement(By.xpath("//a[normalize-space()='Add Employee']")).click();
 		chromeDriver.findElement(By.xpath("//input[@placeholder='First Name']")).sendKeys(emplFName);
@@ -138,22 +136,23 @@ public class OrangeHRM {
 		Assert.assertTrue(recordFoundText.contains(" Found"), "Validating that a record is found for the searched employee first name");
 	}
 
+	//TODO : update the delete employee method
 	@Test(priority = 5)
 	public void deleteEmployee() {
-		String emplFName = "ThisIsARandomName";
 		chromeDriver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[2]/div[1]/div/div[9]/div/button[1]")).click();
-		waitForNow();
 		chromeDriver.findElement(By.xpath("//*[@id=\"app\"]/div[3]/div/div/div/div[3]/button[2]")).click();
 		chromeDriver.findElement(By.xpath("//span[normalize-space()='PIM']")).click();
 		chromeDriver.findElement(By.xpath("(//input[@placeholder='Type for hints...'])[1]")).sendKeys(emplFName);
 		chromeDriver.findElement(By.xpath("//button[@type='submit']")).submit();
+		waitForNow();
 		chromeDriver.findElement(By.xpath("//span[@class='oxd-text oxd-text--span']"));
+		chromeDriver.findElement(By.xpath("//button[@type='submit']")).click();
 		String recordFoundText = chromeDriver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div[2]/div[2]/div/span")).getText();
 		System.out.println("Emp First Name : "+emplFName);
 		System.out.println("No Records Found Text : "+recordFoundText);
 		Assert.assertTrue(recordFoundText.contains("No Records Found"), "Validating that a record is not found for the searched employee first name after deletion");
 	}
-
+	
 	@Test(priority = 6)
 	public void logoutTest() {
 		waitForNow();
