@@ -95,7 +95,6 @@ public class OrangeHRM {
     public void invalidPasswordLoginTest() {
 
         testStep = extent.createTest("Orange HRM - Login with invalid password");
-        testStep.log(Status.INFO, "Waiting for specified time");
         waitForNow(milliSeconds);
         testStep.log(Status.INFO, "Enter username");
         chromeDriver.findElement(By.xpath("//input[@placeholder='Username']")).sendKeys("Admin");
