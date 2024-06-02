@@ -18,7 +18,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,7 +35,7 @@ public class OrangeHRM {
     String empMName;
     String empLName;
     int milliSeconds;
-    String empFullName = emplFName+" "+empLName;
+    String empFullName;
 
     public static void waitForNow(int waitTime) {
         try {
@@ -159,6 +158,7 @@ public class OrangeHRM {
         String xpDeleteBtn = "//i[@class='oxd-icon bi-trash']";
         String xpCnfrmDel = "//button[normalize-space()='Yes, Delete']";
         String xpNoRecFound = "//span[normalize-space()='No Records Found']";
+        empFullName = emplFName + " " + empLName;
 
         chromeDriver.findElement(By.xpath(xpPim)).click();
         chromeDriver.findElement(By.xpath(xpEmpList)).click();
