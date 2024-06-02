@@ -180,4 +180,6 @@ public class OrangeHRM {
         chromeDriver.findElement(By.xpath("//a[normalize-space()='Logout']")).click();
         Assert.assertEquals(chromeDriver.getTitle(), "OrangeHRM", "Validating the page title is correct after logout");
     }
+
+    //TODO: Add code for adding screenshots to Extent Reports
 }
