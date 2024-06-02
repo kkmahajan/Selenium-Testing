@@ -150,7 +150,6 @@ public class OrangeHRM {
         testStep.pass("Search Employee using first name passed");
     }
 
-    //TODO : update the delete employee method
     @Test(priority = 5)
     public void deleteEmployee() {
         testStep.log(Status.INFO, "Delete Employee");
