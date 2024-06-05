@@ -35,7 +35,8 @@ public class Utils {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Screenshot saved as " + " ./Screenshots/" + fileName);
+        System.out.println("Screenshot saved as " + " /Screenshots/" + fileName);
+        System.out.println(ouputFile.getAbsolutePath());
         return ouputFile.getAbsolutePath();
     }
 

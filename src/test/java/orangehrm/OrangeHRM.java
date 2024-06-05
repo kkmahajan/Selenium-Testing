@@ -38,6 +38,7 @@ public class OrangeHRM {
 
     /**
      * This method will wait for 3 seconds
+     *
      * @param waitTime as integer
      */
     public static void waitForNow(int waitTime) {
@@ -79,7 +80,8 @@ public class OrangeHRM {
         extent.attachReporter(spark);
         testStep = extent.createTest("Orange HRM Setup Test", "This is the Orange HRM test setup method");
         testStep.log(Status.INFO, "Setup completed");
-        testStep.addScreenCaptureFromPath(Utils.captureScreenshotAndSaveInLocal("screenshot.png", chromeDriver));
+        waitForNow(milliSeconds);
+        testStep.addScreenCaptureFromPath(Utils.captureScreenshotAndSaveInLocal("screenshotStart.png", chromeDriver));
     }
 
     @AfterTest
@@ -97,7 +99,7 @@ public class OrangeHRM {
     @Test(priority = 1)
     public void invalidPasswordLoginTest() {
 
-//        testStep = extent.createTest("Orange HRM - Login with invalid password");
+        testStep = extent.createTest("Orange HRM - Login with invalid password");
         waitForNow(milliSeconds);
         testStep.log(Status.INFO, "Enter username");
         chromeDriver.findElement(By.xpath("//input[@placeholder='Username']")).sendKeys("Admin");
@@ -105,6 +107,7 @@ public class OrangeHRM {
         chromeDriver.findElement(By.xpath("//input[@placeholder='Password']")).sendKeys("123");
         testStep.log(Status.INFO, "Clicked on submit");
         chromeDriver.findElement(By.xpath("//button[@type='submit']")).submit();
+        waitForNow(milliSeconds);
         testStep.addScreenCaptureFromBase64String(Utils.captureScreenshotBase64(chromeDriver));
         testStep.addScreenCaptureFromPath(Utils.captureScreenshotAndSaveInLocal("screenshot1.png", chromeDriver));
         testStep.addScreenCaptureFromBase64String(Utils.captureScreenshotBase64(chromeDriver), "Login with invalid credentials");
