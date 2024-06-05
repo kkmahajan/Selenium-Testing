@@ -35,8 +35,11 @@ public class OrangeHRM {
     String empMName;
     String empLName;
     int milliSeconds;
-    String empFullName;
 
+    /**
+     * This method will wait for 3 seconds
+     * @param waitTime as integer
+     */
     public static void waitForNow(int waitTime) {
         try {
             Thread.sleep(waitTime);
@@ -76,6 +79,7 @@ public class OrangeHRM {
         extent.attachReporter(spark);
         testStep = extent.createTest("Orange HRM Setup Test", "This is the Orange HRM test setup method");
         testStep.log(Status.INFO, "Setup completed");
+        testStep.addScreenCaptureFromPath(Utils.captureScreenshotAndSaveInLocal("screenshot.png", chromeDriver));
     }
 
     @AfterTest
@@ -93,7 +97,7 @@ public class OrangeHRM {
     @Test(priority = 1)
     public void invalidPasswordLoginTest() {
 
-        testStep = extent.createTest("Orange HRM - Login with invalid password");
+//        testStep = extent.createTest("Orange HRM - Login with invalid password");
         waitForNow(milliSeconds);
         testStep.log(Status.INFO, "Enter username");
         chromeDriver.findElement(By.xpath("//input[@placeholder='Username']")).sendKeys("Admin");
@@ -101,6 +105,10 @@ public class OrangeHRM {
         chromeDriver.findElement(By.xpath("//input[@placeholder='Password']")).sendKeys("123");
         testStep.log(Status.INFO, "Clicked on submit");
         chromeDriver.findElement(By.xpath("//button[@type='submit']")).submit();
+        testStep.addScreenCaptureFromBase64String(Utils.captureScreenshotBase64(chromeDriver));
+        testStep.addScreenCaptureFromPath(Utils.captureScreenshotAndSaveInLocal("screenshot1.png", chromeDriver));
+        testStep.addScreenCaptureFromBase64String(Utils.captureScreenshotBase64(chromeDriver), "Login with invalid credentials");
+        testStep.addScreenCaptureFromPath(Utils.captureScreenshotAndSaveInLocal("screenshot2.png", chromeDriver), "Login with invalid credentials");
         String expectedMessage = "Invalid credentials";
         String actualMessage = chromeDriver.findElement(By.xpath("//p[@class='oxd-text oxd-text--p oxd-alert-content-text']")).getText();
         Assert.assertEquals(actualMessage, expectedMessage, "Validating that the invalid credentials message is displayed after invlaid credentials entered");
@@ -158,7 +166,7 @@ public class OrangeHRM {
         String xpDeleteBtn = "//i[@class='oxd-icon bi-trash']";
         String xpCnfrmDel = "//button[normalize-space()='Yes, Delete']";
         String xpNoRecFound = "//span[normalize-space()='No Records Found']";
-        empFullName = emplFName + " " + empLName;
+        String empFullName = emplFName + " " + empLName;
 
         chromeDriver.findElement(By.xpath(xpPim)).click();
         chromeDriver.findElement(By.xpath(xpEmpList)).click();
