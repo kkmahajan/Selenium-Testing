@@ -1,81 +1,75 @@
 package test;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.*;
 import pages.GoogleSearchPageObjects;
 
 public class ExtentReportsWithTestNg {
 
-	static WebDriver chromeDriver = null;
-	ExtentSparkReporter htmlReporter;
-	static ExtentReports extent;
+    static WebDriver chromeDriver = null;
+    static ExtentReports extent;
+    ExtentSparkReporter htmlReporter;
 
-	@BeforeSuite
-	public void setUpTest() {
+    @Test
+    public static void googleSearchTestPass() {
 
-		htmlReporter = new ExtentSparkReporter("extent-report1.html");
-		extent = new ExtentReports();
-		extent.attachReporter(htmlReporter);
-	}
+        GoogleSearchPageObjects googleSearchPageObjects = new GoogleSearchPageObjects(chromeDriver);
+        ExtentTest test = extent.createTest("Google Search Test Pass");
 
-	@BeforeTest
-	public void beforeTest() {
+        chromeDriver.get("https://www.google.com/");
+        test.pass("In Test1 Navigated to Google.com");
 
-		WebDriverManager.chromedriver().setup();
-		chromeDriver = new ChromeDriver();
-	}
+        googleSearchPageObjects.setTextInSearchTextBox("amazon");
+        test.pass("In Test1 Entered text in search text box");
 
-	@Test
-	public static void googleSearchTestPass() {
+        googleSearchPageObjects.clickSearchButton();
+        test.pass("In Test1 Clicked on the search button");
+    }
 
-		GoogleSearchPageObjects googleSearchPageObjects = new GoogleSearchPageObjects(chromeDriver);
-		ExtentTest test = extent.createTest("Google Search Test Pass");
+    @Test
+    public static void googleSearchTestFail() {
 
-		chromeDriver.get("https://www.google.com/");
-		test.pass("In Test1 Navigated to Google.com");
+        GoogleSearchPageObjects googleSearchPageObjects = new GoogleSearchPageObjects(chromeDriver);
+        ExtentTest test = extent.createTest("Google Search Test Fail");
 
-		googleSearchPageObjects.setTextInSearchTextBox("amazon");
-		test.pass("In Test1 Entered text in search text box");
-		
-		googleSearchPageObjects.clickSearchButton();
-		test.pass("In Test1 Clicked on the search button");
-	}
-	
-	@Test
-	public static void googleSearchTestFail() {
+        chromeDriver.get("https://www.google.com/");
+        test.fail("In Test2 Navigated to Google.com");
 
-		GoogleSearchPageObjects googleSearchPageObjects = new GoogleSearchPageObjects(chromeDriver);
-		ExtentTest test = extent.createTest("Google Search Test Fail");
+        googleSearchPageObjects.setTextInSearchTextBox("amazon");
+        test.pass("In Test2 Entered text in search text box");
 
-		chromeDriver.get("https://www.google.com/");
-		test.fail("In Test2 Navigated to Google.com");
+        googleSearchPageObjects.clickSearchButton();
+        test.pass("In Test2 Clicked on the search button");
+    }
 
-		googleSearchPageObjects.setTextInSearchTextBox("amazon");
-		test.pass("In Test2 Entered text in search text box");
-		
-		googleSearchPageObjects.clickSearchButton();
-		test.pass("In Test2 Clicked on the search button");
-	}
+    @AfterSuite
+    public static void tearDownTest() {
+        extent.flush();
+    }
 
-	@AfterTest
-	public void afterTest() {
-		chromeDriver.close();
-		chromeDriver.quit();
-	}
-	
-	@AfterSuite
-	public static void tearDownTest() {
-		extent.flush();
-	}
+    @BeforeSuite
+    public void setUpTest() {
+
+        htmlReporter = new ExtentSparkReporter("extent-report1.html");
+        extent = new ExtentReports();
+        extent.attachReporter(htmlReporter);
+    }
+
+    @BeforeTest
+    public void beforeTest() {
+
+        WebDriverManager.chromedriver().setup();
+        chromeDriver = new ChromeDriver();
+    }
+
+    @AfterTest
+    public void afterTest() {
+        chromeDriver.close();
+        chromeDriver.quit();
+    }
 }

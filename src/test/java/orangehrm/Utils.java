@@ -40,7 +40,7 @@ public class Utils {
         return ouputFile.getAbsolutePath();
     }
 
-    public static String captureScreenshotBase64(WebDriver chromeDriver){
+    public static String captureScreenshotBase64(WebDriver chromeDriver) {
         TakesScreenshot takesScreenshot = (TakesScreenshot) chromeDriver;
         return takesScreenshot.getScreenshotAs(OutputType.BASE64);
     }
