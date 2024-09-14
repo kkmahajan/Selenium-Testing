@@ -1,0 +1,9 @@
+
+<suite name="SuiteName">
+    <test name="TestName">
+        <classes>
+<!--            <class name="testseptember.DummyWebPageTest"/>-->
+            <class name="orangehrm.OrangeHRMTest"/>
+        </classes>
+    </test>
+</suite>

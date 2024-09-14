@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 import static orangehrm.Constants.*;
 import static orangehrm.Utils.generateRandomText;
 
-public class OrangeHRM {
+public class OrangeHRMTest {
 
     public static String baseUrl = null;
     static WebDriver chromeDriver;
@@ -53,8 +53,7 @@ public class OrangeHRM {
     @BeforeTest
     public void setup() {
 
-        final Logger LOGGER = Logger.getLogger(OrangeHRM.class.getName());
-
+        final Logger LOGGER = Logger.getLogger(OrangeHRMTest.class.getName());
 
         Properties prop = new Properties();
         FileInputStream fileInputStream;
@@ -86,6 +85,7 @@ public class OrangeHRM {
 
     @AfterTest
     public void tearDown() {
+
         testStep = extent.createTest("Orange HRM Tear Down Test");
         testStep.log(Status.INFO, "Execute the tear down method");
         waitForNow(milliSeconds);

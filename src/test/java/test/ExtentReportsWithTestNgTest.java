@@ -9,7 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 import pages.GoogleSearchPageObjects;
 
-public class ExtentReportsWithTestNg {
+public class ExtentReportsWithTestNgTest {
 
     static WebDriver chromeDriver = null;
     static ExtentReports extent;
