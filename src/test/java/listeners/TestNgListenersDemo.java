@@ -10,7 +10,7 @@ public class TestNgListenersDemo {
     @Test
     public void test1() {
         System.out.println("Inside test 1");
-        Assert.assertFalse(true, "Failing test deliberately");
+        Assert.fail("Failing test deliberately");
     }
 
     @Test

@@ -29,15 +29,16 @@ public class Utils {
     public static String captureScreenshotAndSaveInLocal(String fileName, WebDriver chromeDriver) {
         TakesScreenshot takesScreenshot = (TakesScreenshot) chromeDriver;
         File sourceFile = takesScreenshot.getScreenshotAs(OutputType.FILE);
-        File ouputFile = new File("./Screenshots/" + fileName);
+        File outputFile = new File(System.getProperty("user.dir") + "\\Screenshots\\" + fileName);
+        String destination = System.getProperty("user.dir") + "\\Screenshots\\" + fileName;
+        System.out.println("Output File Path : "+outputFile.getAbsolutePath());
+        System.out.println("Output File Path 2 : "+destination);
         try {
-            FileUtils.copyFile(sourceFile, ouputFile);
+            FileUtils.copyFile(sourceFile, outputFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("Screenshot saved as " + " /Screenshots/" + fileName);
-        System.out.println(ouputFile.getAbsolutePath());
-        return ouputFile.getAbsolutePath();
+        return destination;
     }
 
     public static String captureScreenshotBase64(WebDriver chromeDriver) {

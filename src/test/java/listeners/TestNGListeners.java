@@ -35,7 +35,7 @@ public class TestNGListeners implements ITestListener {
     }
 
     public void onStart(ITestContext context) {
-
+        System.out.println("*****Test Suite Started : " + context.getName());
     }
 
     public void onFinish(ITestContext context) {

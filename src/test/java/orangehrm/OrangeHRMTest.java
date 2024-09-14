@@ -108,9 +108,9 @@ public class OrangeHRMTest {
         testStep.log(Status.INFO, "Clicked on submit");
         chromeDriver.findElement(By.xpath("//button[@type='submit']")).submit();
         waitForNow(milliSeconds);
-        testStep.addScreenCaptureFromBase64String(Utils.captureScreenshotBase64(chromeDriver));
-        testStep.addScreenCaptureFromPath(Utils.captureScreenshotAndSaveInLocal("screenshot1.png", chromeDriver));
-        testStep.addScreenCaptureFromBase64String(Utils.captureScreenshotBase64(chromeDriver), "Login with invalid credentials");
+//        testStep.addScreenCaptureFromBase64String(Utils.captureScreenshotBase64(chromeDriver));
+//        testStep.addScreenCaptureFromPath(Utils.captureScreenshotAndSaveInLocal("screenshot1.png", chromeDriver));
+//        testStep.addScreenCaptureFromBase64String(Utils.captureScreenshotBase64(chromeDriver), "Login with invalid credentials");
         testStep.addScreenCaptureFromPath(Utils.captureScreenshotAndSaveInLocal("screenshot2.png", chromeDriver), "Login with invalid credentials");
         String expectedMessage = "Invalid credentials";
         String actualMessage = chromeDriver.findElement(By.xpath("//p[@class='oxd-text oxd-text--p oxd-alert-content-text']")).getText();
