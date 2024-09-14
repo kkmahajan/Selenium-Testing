@@ -1,4 +1,4 @@
-package orangehrm;
+package util;
 
 import org.apache.commons.io.FileUtils;
 import org.jetbrains.annotations.NotNull;
