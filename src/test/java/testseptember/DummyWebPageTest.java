@@ -27,7 +27,7 @@ import static orangehrm.OrangeHRMTest.waitForNow;
 import static test.UtilsTest.waitForASec;
 
 public class DummyWebPageTest {
-    static final String webPageAddress = "C:\\Users\\admin\\IdeaProjects\\Selenium-Testing\\src\\test\\resources\\myPage.html";
+
     static WebDriver chromeDriver = null;
     static ExtentSparkReporter spark;
     static ExtentReports extent;
@@ -60,7 +60,7 @@ public class DummyWebPageTest {
         spark = new ExtentSparkReporter(extentReportForDummyWebPage);
         extent = new ExtentReports();
         extent.attachReporter(spark);
-        testStep = extent.createTest("Dummy WebPage Setup Test", "This is the Dummy WebPage Test setup method");
+        testStep = extent.createTest("Dummy WebPage Setup Test", "This is the Description for Dummy WebPage Setup Test");
         testStep.log(Status.INFO, "Setup completed");
         waitForNow(milliSeconds);
     }
@@ -68,11 +68,11 @@ public class DummyWebPageTest {
     @AfterTest
     public void tearDown() {
 
-        testStep = extent.createTest("Dummy WebPage Tear Down Test");
+        testStep = extent.createTest("Dummy WebPage Tear Down Test", "This is the Description for Dummy WebPage Tear Down Test");
         testStep.log(Status.INFO, "Execute the tear down method");
         waitForNow(milliSeconds);
         chromeDriver.close();
-        testStep.pass("Closed the browser");
+        testStep.info("Closed the browser");
         chromeDriver.quit();
         testStep.info("Test completed");
         extent.flush();
@@ -81,7 +81,6 @@ public class DummyWebPageTest {
     public static void waitForNow(int waitTime) {
         try {
             Thread.sleep(waitTime);
-            testStep.log(Status.INFO, "Wait for 3 seconds");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -92,10 +91,10 @@ public class DummyWebPageTest {
 
         chromeDriver.get(baseUrl);
         chromeDriver.manage().window().maximize();
-        waitForASec();
-        chromeDriver.manage().window().minimize();
-        waitForASec();
-        chromeDriver.manage().window().maximize();
-        testStep.addScreenCaptureFromPath(Utils.captureScreenshotAndSaveInLocal("screenshotDummy.png", chromeDriver));
+        String base64 = Utils.captureScreenshotBase64(chromeDriver);
+        testStep.log(Status.INFO, "Screenshot Test 1 - Base 64").addScreenCaptureFromBase64String(base64);
+        testStep.log(Status.INFO, "Screenshot Test 1.1 - Base 64").addScreenCaptureFromBase64String(base64, "Dummy App Image");
+        testStep.log(Status.INFO, "Screenshot Test 2 - From Path").addScreenCaptureFromPath(Utils.captureScreenshotAndSaveInLocal("screenshotDum1.png", chromeDriver),"Dummy App Image");
+        testStep.log(Status.INFO, "Screenshot Test 2.1 - From Path").addScreenCaptureFromPath(Utils.captureScreenshotAndSaveInLocal("screenshotDum2.png", chromeDriver));
     }
 }
