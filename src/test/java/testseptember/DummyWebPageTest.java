@@ -5,7 +5,6 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import orangehrm.OrangeHRMTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
@@ -16,25 +15,28 @@ import util.Utils;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static orangehrm.Constants.*;
-import static orangehrm.Constants.extentReportForOrangeHrm;
-import static orangehrm.OrangeHRMTest.waitForNow;
-import static test.UtilsTest.waitForASec;
 
 public class DummyWebPageTest {
 
+    public static String baseUrl = null;
     static WebDriver chromeDriver = null;
     static ExtentSparkReporter spark;
     static ExtentReports extent;
     static ExtentTest testStep;
-    public static String baseUrl = null;
     int milliSeconds;
 
+    public static void waitForNow(int waitTime) {
+        try {
+            Thread.sleep(waitTime);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @BeforeTest
     public void setup() {
@@ -78,14 +80,6 @@ public class DummyWebPageTest {
         extent.flush();
     }
 
-    public static void waitForNow(int waitTime) {
-        try {
-            Thread.sleep(waitTime);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     @Test
     public void dummyWebPageTest() {
 
@@ -94,7 +88,7 @@ public class DummyWebPageTest {
         String base64 = Utils.captureScreenshotBase64(chromeDriver);
         testStep.log(Status.INFO, "Screenshot Test 1 - Base 64").addScreenCaptureFromBase64String(base64);
         testStep.log(Status.INFO, "Screenshot Test 1.1 - Base 64").addScreenCaptureFromBase64String(base64, "Dummy App Image");
-        testStep.log(Status.INFO, "Screenshot Test 2 - From Path").addScreenCaptureFromPath(Utils.captureScreenshotAndSaveInLocal("screenshotDum1.png", chromeDriver),"Dummy App Image");
+        testStep.log(Status.INFO, "Screenshot Test 2 - From Path").addScreenCaptureFromPath(Utils.captureScreenshotAndSaveInLocal("screenshotDum1.png", chromeDriver), "Dummy App Image");
         testStep.log(Status.INFO, "Screenshot Test 2.1 - From Path").addScreenCaptureFromPath(Utils.captureScreenshotAndSaveInLocal("screenshotDum2.png", chromeDriver));
     }
 }
