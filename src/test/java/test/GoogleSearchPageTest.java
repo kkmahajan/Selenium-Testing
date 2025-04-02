@@ -20,9 +20,10 @@ public class GoogleSearchPageTest {
 
         GoogleSearchPageObjects googleSearchPageObjects = new GoogleSearchPageObjects(chromeDriver);
         chromeDriver.get("https://www.google.com/");
-
+        googleSearchPageObjects.maximizePage();
         googleSearchPageObjects.setTextInSearchTextBox("amazon");
         googleSearchPageObjects.clickSearchButton();
+//        googleSearchPageObjects.clickEnter();
         chromeDriver.close();
         chromeDriver.quit();
     }

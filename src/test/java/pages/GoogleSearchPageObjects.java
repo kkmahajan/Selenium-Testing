@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -42,5 +43,13 @@ public class GoogleSearchPageObjects {
 
     public void findAttribute(WebElement element){
         System.out.println("Element's name : "+element.getAttribute("name"));
+    }
+
+    public void maximizePage(){
+        driver.manage().window().maximize();
+    }
+
+    public void clickEnter(){
+        driver.findElement(searchTextBox).sendKeys(Keys.ENTER);
     }
 }
